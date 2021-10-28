@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class InformacoesUsuarioTest {
     @Test
     public void testAdicionarUmaInformacaoAdicionalDoUsuario(){
@@ -15,6 +17,7 @@ public class InformacoesUsuarioTest {
         // creating a new variable and actually opening chrome already
         WebDriver nChrome = new ChromeDriver();
         nChrome.manage().window().maximize();
+        nChrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         //opening my first page, using teacher's webpage
         nChrome.get("http://www.juliodelima.com.br/taskit");
@@ -33,6 +36,15 @@ public class InformacoesUsuarioTest {
         // sign in click
         nChrome.findElement(By.linkText("SIGN IN")).click();
 
-        assertEquals(1, 1);
+        // identify that it is me who is logged by element
+        WebElement me = nChrome.findElement(By.className("me"));
+        String textoNoElementoMe = me.getText();
+
+        assertEquals( "Hi, joaotn", textoNoElementoMe);
+
+        //closing the browser
+        nChrome.quit();
+
+
     }
 }
