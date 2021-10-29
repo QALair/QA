@@ -1,6 +1,9 @@
 package tests;
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,18 +13,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class InformacoesUsuarioTest {
-    @Test
-    public void testAdicionarUmaInformacaoAdicionalDoUsuario(){
+    private WebDriver nChrome;
+
+    @Before
+    public void setup() {
         // setting the chromedriver location
-        System.setProperty("webdriver.chrome.driver","D:\\Driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:\\Driver\\chromedriver.exe");
         // creating a new variable and actually opening chrome already
-        WebDriver nChrome = new ChromeDriver();
+        nChrome = new ChromeDriver();
         nChrome.manage().window().maximize();
         nChrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         //opening my first page, using teacher's webpage
         nChrome.get("http://www.juliodelima.com.br/taskit");
+    }
 
+    @Test
+    public void testLogin(){
         // click at the link that contains the text "sign in"
         // If it was smth that I was going to use a lot :
         //WebElement linkSignIn = nChrome.findElement(By.linkText("Sign in"));
@@ -41,10 +49,40 @@ public class InformacoesUsuarioTest {
         String textoNoElementoMe = me.getText();
 
         assertEquals( "Hi, joaotn", textoNoElementoMe);
+    }
 
+    // new test case, testing myself for doing smth alone, and it worked, java seems to be easy and cool
+    @Test
+    public void testMePanel(){
+        // Calling login method
+        testLogin();
+        // clicking at MEEE
+        nChrome.findElement(By.className("me")).click();
+        // Trying something that the teacher didnt teach yet, XPath!!
+        WebElement textoNoH4 = nChrome.findElement(By.xpath("/html/body/div[1]/div/div/h4"));
+        // doing the assertion comparing the h4, bcuz it is only on this page, and it worked
+        assertEquals("Hi, joaotn", textoNoH4.getText());
+    }
+
+    //ComboBoxes and Toast messages class
+    @Test
+    public void testAddMoreData(){
+        // Calling login method again
+        testLogin();
+        // clicking at MEEE, I know, again, it is just to make it faster
+        nChrome.findElement(By.className("me")).click();
+        // click at the link that contains the text MORE DATA ABOUT YOU
+        nChrome.findElement(By.linkText("MORE DATA ABOUT YOU")).click();
+        // click at the button add more data
+        nChrome.findElement(By.xpath("//*[@id=\"moredata\"]/div[2]/button")).click();
+        // now the "add more data about me" panel is open, lets select the combo and add the data
+
+
+    }
+
+    @After
+    public void tearDown(){
         //closing the browser
         nChrome.quit();
-
-
     }
 }
