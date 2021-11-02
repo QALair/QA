@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
 
@@ -73,11 +74,25 @@ public class InformacoesUsuarioTest {
         nChrome.findElement(By.className("me")).click();
         // click at the link that contains the text MORE DATA ABOUT YOU
         nChrome.findElement(By.linkText("MORE DATA ABOUT YOU")).click();
-        // click at the button add more data
+
         nChrome.findElement(By.xpath("//*[@id=\"moredata\"]/div[2]/button")).click();
+
         // now the "add more data about me" panel is open, lets select the combo and add the data
+        WebElement popupAddMoreData = nChrome.findElement(By.id("addmoredata"));
 
+        WebElement campoType = popupAddMoreData.findElement(By.name("type"));
+        new Select(campoType).selectByVisibleText("Phone");
+        // clicked on phone now its just add the data
 
+        popupAddMoreData.findElement(By.name("contact")).sendKeys("+5543991231234");
+        popupAddMoreData.findElement(By.linkText("SAVE")).click();
+
+        // now the toast message
+
+        WebElement tMessage = nChrome.findElement(By.id("toast-container"));
+        String message = tMessage.getText();
+
+        assertEquals("Your contact has been added!", message);
     }
 
     @After
