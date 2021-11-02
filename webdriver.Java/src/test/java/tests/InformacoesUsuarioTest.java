@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,11 +14,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import support.Generator;
+import support.Screenshot;
 
 import java.util.concurrent.TimeUnit;
 
 public class InformacoesUsuarioTest {
     private WebDriver nChrome;
+
+    @Rule
+    public TestName test = new TestName();
 
     @Before
     public void setup() {
@@ -30,7 +37,6 @@ public class InformacoesUsuarioTest {
         /* opening my first page, using teacher's webpage */
         nChrome.get("http://www.juliodelima.com.br/taskit");
     }
-
     @Test
     public void testLogin(){
         /* click at the link that contains the text "sign in" */
@@ -49,8 +55,9 @@ public class InformacoesUsuarioTest {
         String textoNoElementoMe = me.getText();
 
         assertEquals( "Hi, joaotn", textoNoElementoMe);
+        /* taking a screenshot after the assertion  */
+        Screenshot.capture(nChrome,"D:\\test-report\\"+ test.getMethodName() + Generator.dataHoraParaArquivo()+".png");
     }
-
     // new test case, testing myself for doing smth alone, and it worked, java seems to be easy and cool
     @Test
     public void testMePanel(){
@@ -62,8 +69,9 @@ public class InformacoesUsuarioTest {
         WebElement textoNoH4 = nChrome.findElement(By.xpath("/html/body/div[1]/div/div/h4"));
         /* doing the assertion comparing the h4, bcuz it is only on this page, and it worked */
         assertEquals("Hi, joaotn", textoNoH4.getText());
+        /* taking a screenshot after the assertion  */
+        Screenshot.capture(nChrome,"D:\\test-report\\"+ test.getMethodName() + Generator.dataHoraParaArquivo()+".png");
     }
-
     //ComboBoxes and Toast messages class
     @Test
     public void testAddMoreData(){
@@ -92,6 +100,8 @@ public class InformacoesUsuarioTest {
         String message = tMessage.getText();
 
         assertEquals("Your contact has been added!", message);
+        /* taking a screenshot after the assertion  */
+        Screenshot.capture(nChrome,"D:\\test-report\\"+ test.getMethodName() + Generator.dataHoraParaArquivo()+".png");
     }
     /* removing information test */
     @Test
@@ -112,12 +122,13 @@ public class InformacoesUsuarioTest {
         /* Classic assertion about the removing confirmation */
         assertEquals("Rest in peace, dear phone!", message);
 
+        /* taking a screenshot after the assertion  */
+        Screenshot.capture(nChrome,"D:\\test-report\\"+ test.getMethodName() + Generator.dataHoraParaArquivo()+".png");
+
         /* waiting 10 seconds be4 the toast message disappear  */
         WebDriverWait cWait = new WebDriverWait(nChrome, 10);
         cWait.until(ExpectedConditions.stalenessOf(tMessage));
-
     }
-
     @After
     public void tearDown(){
         /* Classic logout added to finish every test case */
