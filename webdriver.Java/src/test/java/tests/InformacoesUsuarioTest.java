@@ -2,11 +2,15 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import org.easetech.easytest.annotation.DataLoader;
+import org.easetech.easytest.annotation.Param;
+import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +23,8 @@ import support.Screenshot;
 
 import java.util.concurrent.TimeUnit;
 
+@RunWith(DataDrivenTestRunner.class)
+@DataLoader(filePaths = "InformacoesUsuarioTest_Data.csv")
 public class InformacoesUsuarioTest {
     private WebDriver nChrome;
 
@@ -74,7 +80,7 @@ public class InformacoesUsuarioTest {
     }
     //ComboBoxes and Toast messages class
     @Test
-    public void testAddMoreData(){
+    public void testAddMoreData(@Param(name="type")String type, @Param(name="contact")String contact, @Param(name="message")String expectedmessage){
         /* Calling login method again */
         testLogin();
         /* clicking at MEEE, I know, again, it is just to make it faster */
@@ -88,10 +94,10 @@ public class InformacoesUsuarioTest {
         WebElement popupAddMoreData = nChrome.findElement(By.id("addmoredata"));
 
         WebElement campoType = popupAddMoreData.findElement(By.name("type"));
-        new Select(campoType).selectByVisibleText("Phone");
+        new Select(campoType).selectByVisibleText(type);
         /* clicked on phone now its just add the data */
 
-        popupAddMoreData.findElement(By.name("contact")).sendKeys("+5543991231234");
+        popupAddMoreData.findElement(By.name("contact")).sendKeys(contact);
         popupAddMoreData.findElement(By.linkText("SAVE")).click();
 
         /* now the toast message */
@@ -99,7 +105,7 @@ public class InformacoesUsuarioTest {
         WebElement tMessage = nChrome.findElement(By.id("toast-container"));
         String message = tMessage.getText();
 
-        assertEquals("Your contact has been added!", message);
+        assertEquals(expectedmessage, message);
         /* taking a screenshot after the assertion  */
         Screenshot.capture(nChrome,"D:\\test-report\\"+ test.getMethodName() + Generator.dataHoraParaArquivo()+".png");
     }

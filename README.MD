@@ -28,3 +28,4 @@
 # !!! TRY TO MAKE ASSERTIONS ONLY AT THE END OF THE TESTS !!!
 # Chrome search: / = stop at first, // = look at the whole page
 # gotta learn more about chrome search //span[text()="+5543991231234"]/following-sibling::a
+# EasyTest = JUnit extension made for data driven tests, can be found at maven repository
