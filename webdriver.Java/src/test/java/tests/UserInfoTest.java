@@ -20,31 +20,23 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import support.Generator;
 import support.Screenshot;
+import support.Web;
 
 import java.util.concurrent.TimeUnit;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "InformacoesUsuarioTest_Data.csv")
-public class InformacoesUsuarioTest {
+public class UserInfoTest {
     private WebDriver nChrome;
 
     @Rule
     public TestName test = new TestName();
 
-    @Before
-    public void setup() {
-        /* setting the chromedriver location */
-        System.setProperty("webdriver.chrome.driver", "D:\\Driver\\chromedriver.exe");
-        /* creating a new variable and actually opening chrome already */
-        nChrome = new ChromeDriver();
-        nChrome.manage().window().maximize();
-        nChrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-        /* opening my first page, using teacher's webpage */
-        nChrome.get("http://www.juliodelima.com.br/taskit");
-    }
     @Test
     public void testLogin(){
+        /* calling the setup from outside, this was made after refactoring   */
+        nChrome = Web.createChrome();
+
         /* click at the link that contains the text "sign in" */
         nChrome.findElement(By.linkText("Sign in")).click(); // he is teaching to use the text element to find, but I already knew about xpath
 

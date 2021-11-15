@@ -1,5 +1,5 @@
-testAddMoreData,type,contact,message,Duration(ms)
-"",Phone,+5543996660000,Your contact has been added!,2922.0
-"",Phone,+5543996660000,Your contact has been added!,2964.0
-"",Phone,+5543996660000,Your contact has been added!,2939.0
-"",E-mail,testjoao@julio.com.br,Your contact has been added!,3053.0
+testAddMoreData,type,contact,message,Duration(ms),Duration(ms)
+"",Phone,+5543996660000,Your contact has been added!,4682.0,4682.0
+"",Phone,+5543996660000,Your contact has been added!,3526.0,3526.0
+"",Phone,+5543996660000,Your contact has been added!,3322.0,3322.0
+"",E-mail,testjoao@julio.com.br,Your contact has been added!,3325.0,3325.0

@@ -29,3 +29,5 @@
 # Chrome search: / = stop at first, // = look at the whole page
 # gotta learn more about chrome search //span[text()="+5543991231234"]/following-sibling::a
 # EasyTest = JUnit extension made for data driven tests, can be found at maven repository
+# Page object and concepts https://martinfowler.com/bliki/PageObject.html
+# we must do and see everything that the user could see!
