@@ -21,7 +21,7 @@ public class UserInfoPageObjectsTest {
 
     @Before
     public void setUp(){
-        nChrome = Web.createChrome();
+        nChrome = Web.createBrowserStack();
 
     }
 
@@ -46,7 +46,7 @@ public class UserInfoPageObjectsTest {
 
     @After
     public void tearDown(){
-        //nChrome.quit();
+        nChrome.quit();
     }
 
 }
