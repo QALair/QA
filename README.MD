@@ -31,3 +31,5 @@
 # EasyTest = JUnit extension made for data driven tests, can be found at maven repository
 # Page object and concepts https://martinfowler.com/bliki/PageObject.html
 # we must do and see everything that the user could see!
+
+#mvn by commandline mvn clean test -Dtest=tests.UserInfoPageObjectsTest#testAddUserAdditionalInfo
