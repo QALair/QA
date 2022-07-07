@@ -1,7 +1,7 @@
 ##Atention
 
 ##This repository is all about a course that I`m doing at udemy, so if you se any names that aren't mine
-# that name may belong to the teacher or to another person envolved to teaching.
+## any name found in the project may belong to the teacher or to another person envolved to teaching, or even myself.
 
 ## this is my first java-maven project
 
